@@ -2,13 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StaffService {
 
-  constructor(private _HttpClient: HttpClient) { }
+  constructor(
+    private _HttpClient: HttpClient,
+    private _AuthService:AuthService
+  ) { }
 
   getSpecialities(): Observable<any> {
     return this._HttpClient.get(environment.baseUrl + 'doctor/specialities')
@@ -86,6 +90,10 @@ export class StaffService {
     return this._HttpClient.get(environment.baseUrl + `chat/doctor/receive/patient/${patientId}?id=${doctorId}&role=2`)
   }
 
+  getSpecificDoctorMessagesForAdmin(doctorId: string): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl+`Chat/admin/receive/doctor/${doctorId}?id=${this._AuthService.user?.id}&role=0`)
+  }
+
   getMessagesFromPatients(id: string): Observable<any> {
     return this._HttpClient.get(environment.baseUrl + `/chat/doctor/receive/patients?role=2&id=${id}`)
   }
@@ -108,6 +116,10 @@ export class StaffService {
 
   updateMedicine(data: object): Observable<any> {
     return this._HttpClient.post(environment.baseUrl + 'medicine/update', data);
+  }
+
+  addDoctor(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'doctor/add', data);
   }
 
   addEmergency(data: object): Observable<any> {
@@ -150,12 +162,20 @@ export class StaffService {
     return this._HttpClient.get(environment.baseUrl + 'patient/history/' + patientId)
   }
 
+  getAllHealthRecords(): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + 'care/healthdata');
+  }
+
+  getLastHealthRecord(): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + 'care/latestreading');
+  }
+
   getAllRooms(): Observable<any> {
     return this._HttpClient.get(environment.baseUrl + 'room/all')
   }
 
   cancelEmergency(data: object): Observable<any> {
-    return this._HttpClient.post(environment.baseUrl+'consultation/cancel', data)
+    return this._HttpClient.post(environment.baseUrl + 'consultation/cancel', data)
   }
 
   payForReservation(data: object): Observable<any> {

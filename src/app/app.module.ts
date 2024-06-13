@@ -55,6 +55,7 @@ import { HealthRecordComponent } from './Components/health-record/health-record.
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
     MatIconModule,
     MatSliderModule,
     MatRadioModule,
+    MatCheckboxModule,
     HttpClientModule,
     ToastrModule.forRoot()
   ],
