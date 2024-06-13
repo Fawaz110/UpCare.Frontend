@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/Core/Services/auth.service';
 import { StaffService } from 'src/app/Core/Services/staff.service';
+import { AddDoctorComponent } from '../add-doctor/add-doctor.component';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 @Component({
@@ -41,10 +44,11 @@ export class DoctorsComponent implements OnInit {
 
   constructor(
     private _StaffService: StaffService,
-    private _Renderer2: Renderer2,
-    private _ElementRef: ElementRef,
     private _FormBuilder: FormBuilder,
-    public _AuthService: AuthService) { }
+    public _AuthService: AuthService,
+    private _MatDialog: MatDialog,
+    private _ToastrService: ToastrService
+  ) { }
 
   dropToggle() {
     $('.drop').fadeToggle();
@@ -54,34 +58,24 @@ export class DoctorsComponent implements OnInit {
     this.isOpen = true;
     this.sendMessageForm.get('receiverId')?.setValue(id);
     // continue logic
-    console.log(this.recentMessages);
-    for(let element of this.recentMessages){
-      if (element?.clientId == id) {
-        this.openedMessages = element.messages
-        console.log('messages', this.openedMessages);
-        if (element.messages[0].isSent) {
-          if (element.messages[0].receiverRole == 2) {
-            this._StaffService.getSpecificDoctor(id).subscribe({
-              next: response => {
-                console.log('get doctor');
-                this.openedDoctor = response
-                // console.log(this.openedDoctor);
-              }, error: err => {
-                console.error('error', err);
-              }
-            })
-          }
+    this._StaffService.getSpecificDoctorMessagesForAdmin(id).subscribe({
+      next: response => {
+        this.openedMessages = response
+      },
+      error: error => {
+        if (error?.error?.message == 'no messages found') {
+          this.openedMessages = []
         }
       }
-      else {
-        this.openedMessages = []
-        this._StaffService.getSpecificDoctor(id).subscribe({
-          next: response => {
-            this.openedDoctor = response
-          }
-        })
+    })
+    this._StaffService.getSpecificDoctor(id).subscribe({
+      next: response => {
+        this.openedDoctor = response
+      },
+      error: error => {
+        console.log(error);
       }
-    }
+    })
   }
 
   sendMessage() {
@@ -90,8 +84,6 @@ export class DoctorsComponent implements OnInit {
         console.log(response);
         if (response.message == 'success') {
           this.sendMessageForm.get('content')?.setValue('');
-          console.log('form', this.sendMessageForm.value);
-          console.log('res', response);
           this.getMessages();
         }
       }, error: err => {
@@ -147,6 +139,17 @@ export class DoctorsComponent implements OnInit {
     }
   }
 
+
+  openDialog() {
+    const diaglogRef = this._MatDialog.open(AddDoctorComponent);
+
+    diaglogRef.afterClosed().subscribe(message => {
+      if (message != undefined) {
+        this._ToastrService.success(`Dr. ${message} Added Successfully`);
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.sendMessageForm = this._FormBuilder.group({
       content: ['', [Validators.required]],
@@ -157,7 +160,9 @@ export class DoctorsComponent implements OnInit {
     this._StaffService.getAllDoctors().subscribe({
       next: response => {
         this.doctors = response
-        console.log(this.doctors);
+      },
+      error: error => {
+        console.log(error);
       }
     })
 

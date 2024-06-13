@@ -7,6 +7,9 @@
           <input type="search" placeholder="search by doctor name..." class="form-control" [(ngModel)]="searchTerm">
         </div>
       </div>
+      <button mat-mini-fab color="primary" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
       <div class="col-2">
         <app-logged-user></app-logged-user>
       </div>
@@ -70,8 +73,9 @@
               </div>
             </div>
             <div class="inner h-100" *ngIf="!(openedMessages.length > 0)">
-              <div class="d-flex align-items-center justify-content-center h-100">
-                <h2 class="display-4 text-muted">No Messages Sent yet.</h2>
+              <div class="d-flex align-items-center justify-content-center flex-column h-100">
+                <img class="w-50" src="./assets/nothing-selected.jpg" alt="">
+                <h2 class="display-6 text-muted">No Messages Sent yet.</h2>
               </div>
             </div>
           </div>
