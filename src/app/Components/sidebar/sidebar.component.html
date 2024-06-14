@@ -4,7 +4,7 @@
             <img src="./assets/up-care-logo.png" class="w-75" alt="">
         </div>
         <ul class="list-unstyled ms-3">
-            <li class="px-2 mb-2">
+            <li class="px-2 mb-2" *ngIf="['admin', 'receptionist'].includes(_AuthService.user?.userRole!)">
                 <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/emergency" routerLinkActive="nav-link-acive">
                     <i class="position-absolute fa-solid fa-caret-right"></i>
                     <div class="link-inner">
@@ -30,7 +30,7 @@
                     </div>
                 </a>
             </li>
-            <li class="px-2 mb-2">
+            <li class="px-2 mb-2" *ngIf="!(['checkupLab', 'radiologyLab'].includes(_AuthService.user?.userRole!))">
                 <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/patients" routerLinkActive="nav-link-acive">
                     <i class="position-absolute fa-solid fa-caret-right"></i>
                     <div class="link-inner">
@@ -43,7 +43,7 @@
                     </div>
                 </a>
             </li>
-            <li class="px-2 mb-2" *ngIf="['admin', 'receptionist'].includes(_AuthService.user?.userRole || '')">
+            <li class="px-2 mb-2" *ngIf="['admin', 'receptionist'].includes(_AuthService.user?.userRole!)">
                 <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/rooms" routerLinkActive="nav-link-acive">
                     <i class="position-absolute fa-solid fa-caret-right"></i>
                     <div class="link-inner">
@@ -118,7 +118,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="px-2 mb-2" *ngIf="['admin', 'pharmacy'].includes(_AuthService.user?.userRole || '')">
+            <li class="px-2 mb-2" *ngIf="['admin', 'pharmacy'].includes(_AuthService.user?.userRole!)">
                 <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/pharmacy" routerLinkActive="nav-link-acive">
                     <i class="position-absolute fa-solid fa-caret-right"></i>
                     <div class="link-inner">
@@ -157,7 +157,7 @@
                     </div>
                 </a>
             </li>
-            <li class="px-2 mb-2" *ngIf="['admin', 'receptionist'].includes(_AuthService.user?.userRole || '')">
+            <li class="px-2 mb-2" *ngIf="['admin', 'receptionist'].includes(_AuthService.user?.userRole!)">
                 <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/reviews" routerLinkActive="nav-link-acive">
                     <i class="position-absolute fa-solid fa-caret-right"></i>
                     <div class="link-inner">

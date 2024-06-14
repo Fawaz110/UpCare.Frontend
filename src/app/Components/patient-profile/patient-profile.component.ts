@@ -174,6 +174,10 @@ export class PatientProfileComponent implements OnInit {
     const matDialogRef = this._MatDialog.open(HealthRecordComponent);
   }
 
+  openPrescriptionDialog(){
+    const idalogRef = this._MatDialog
+  }
+
   ngOnInit(): void {
     this._WebRtcService.initializePeerConnection();
     this.sendMessageForm = this._FormBuilder.group({

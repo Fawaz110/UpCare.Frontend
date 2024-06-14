@@ -56,6 +56,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AddPrescriptionComponent } from './Components/add-prescription/add-prescription.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AddMedicineComponent,
     SearchBillPipe,
     HealthRecordComponent,
+    AddPrescriptionComponent,
   ],
   imports: [
     BrowserModule,

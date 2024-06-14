@@ -129,7 +129,7 @@
                         </div>
                         <div class="col-5">
                             <div class="inner d-flex align-items-center flex-column h-100">
-                                <p class="m-0 ms-auto ">{{bill?.paidMoney/100}} <span style="color: #34D1BF;">EGP</span></p>
+                                <p class="m-0 ms-auto ">{{bill?.paidMoney}} <span style="color: #34D1BF;">EGP</span></p>
 
                                 <p class="m-0 ms-auto small" *ngIf="getDateOnly() == getDateOnly(bill?.dateTime)">{{getTimeOnly(bill?.dateTime)}} <i class="fa-regular fa-clock text-muted"></i></p>
                                 <p class="m-0 ms-auto small" *ngIf="getDateOnly() != getDateOnly(bill?.dateTime)">{{getDateOnly(bill?.dateTime)}} {{getTimeOnly(bill?.dateTime)}} <i class="fa-regular fa-clock text-muted"></i></p>
