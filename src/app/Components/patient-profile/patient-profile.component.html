@@ -3,7 +3,7 @@
     <mat-icon>bar_chart</mat-icon>
   </button>
   <div class="header row justify-content-end mb-3">
-    <div class="col-2">
+    <div class="col-2" *ngIf="_AuthService.user?.userRole == 'doctor'">
       <div class="inner w-100 h-100 hstack justify-content-end">
         <button mat-raised-button color="primary" (click)="openPrescriptionDialog()">Add Prescription</button>
       </div>

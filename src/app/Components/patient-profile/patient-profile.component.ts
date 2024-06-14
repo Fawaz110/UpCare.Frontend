@@ -7,6 +7,8 @@ import { StaffService } from 'src/app/Core/Services/staff.service';
 import { AuthService } from 'src/app/Core/Services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HealthRecordComponent } from '../health-record/health-record.component';
+import { AddPrescriptionComponent } from '../add-prescription/add-prescription.component';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any
 @Component({
   selector: 'app-patient-profile',
@@ -27,7 +29,8 @@ export class PatientProfileComponent implements OnInit {
     private _WebRtcService: WebRtcService,
     private _FormBuilder: FormBuilder,
     public _AuthService: AuthService,
-    private _MatDialog: MatDialog
+    private _MatDialog: MatDialog,
+    private _ToastrService: ToastrService
   ) {
     _ActivatedRoute.params.subscribe({
       next: (params) => {
@@ -174,8 +177,27 @@ export class PatientProfileComponent implements OnInit {
     const matDialogRef = this._MatDialog.open(HealthRecordComponent);
   }
 
-  openPrescriptionDialog(){
-    const idalogRef = this._MatDialog
+  openPrescriptionDialog() {
+    const dialogRef = this._MatDialog.open(AddPrescriptionComponent, {
+      data: {
+        patientId: this.patientHistory?.patientInfo?.id
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(message => {
+      if (message == 'success') {
+        this._ToastrService.success('Prescription Added Successfully')
+        
+        this._StaffService.getPatientProfile(this.patientHistory?.patientInfo?.id).subscribe({
+          next: response => {
+            this.patientHistory = response
+          },
+          error: error => {
+            console.log(error);
+          }
+        })
+      }
+    })
   }
 
   ngOnInit(): void {

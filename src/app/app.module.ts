@@ -57,6 +57,7 @@ import { RouterOutlet } from '@angular/router';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddPrescriptionComponent } from './Components/add-prescription/add-prescription.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { AddPrescriptionComponent } from './Components/add-prescription/add-pres
     MatAutocompleteModule,
     MatButtonModule,
     MatNativeDateModule,
+    MatChipsModule,
     MatIconModule,
     MatSliderModule,
     MatRadioModule,

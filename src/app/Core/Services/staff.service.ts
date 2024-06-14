@@ -11,7 +11,7 @@ export class StaffService {
 
   constructor(
     private _HttpClient: HttpClient,
-    private _AuthService:AuthService
+    private _AuthService: AuthService
   ) { }
 
   getSpecialities(): Observable<any> {
@@ -91,7 +91,7 @@ export class StaffService {
   }
 
   getSpecificDoctorMessagesForAdmin(doctorId: string): Observable<any> {
-    return this._HttpClient.get(environment.baseUrl+`Chat/admin/receive/doctor/${doctorId}?id=${this._AuthService.user?.id}&role=0`)
+    return this._HttpClient.get(environment.baseUrl + `Chat/admin/receive/doctor/${doctorId}?id=${this._AuthService.user?.id}&role=0`)
   }
 
   getMessagesFromPatients(id: string): Observable<any> {
@@ -120,6 +120,10 @@ export class StaffService {
 
   addDoctor(data: object): Observable<any> {
     return this._HttpClient.post(environment.baseUrl + 'doctor/add', data);
+  }
+
+  addPrescription(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'prescription/add', data)
   }
 
   addEmergency(data: object): Observable<any> {
