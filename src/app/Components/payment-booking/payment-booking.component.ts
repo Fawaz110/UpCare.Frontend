@@ -24,7 +24,17 @@ export class PaymentBookingComponent implements OnInit {
   ) { }
 
   submitForm() {
-    this._MatDialogRef.close('paid')
+    this._StaffService.payForBooking(this.data).subscribe({
+      next: response => {
+        this._MatDialogRef.close('paid')
+      },
+      error: error => {
+        console.log(error?.error?.statusCode);
+        if(error?.error?.statusCode == 400){
+          this._MatDialogRef.close('no')
+        }
+      }
+    })
   }
 
   ngOnInit(): void {

@@ -23,7 +23,7 @@ export class RoomDetailsComponent implements OnInit {
     private _StaffService: StaffService,
     private _Router: Router,
     private _ToastrService: ToastrService,
-    public _AuthService:AuthService
+    public _AuthService: AuthService
   ) {
 
   }
@@ -56,7 +56,7 @@ export class RoomDetailsComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(message => {
-      if(message == 'booked'){
+      if (message == 'booked') {
         this._ToastrService.success('Booking added successfully');
         this._MatDialogRef.close('booked')
       }
@@ -88,7 +88,7 @@ export class RoomDetailsComponent implements OnInit {
         })
 
         paymentRef.afterClosed().subscribe(message => {
-          if(message == 'paid'){
+          if (message == 'paid') {
             this._StaffService.endBookingForPatient(roomInfo).subscribe({
               next: response => {
                 this.data.patientBooking.splice(index, 1);
@@ -99,6 +99,10 @@ export class RoomDetailsComponent implements OnInit {
                 console.log(error);
               }
             })
+          }
+          else if (message == 'no') {
+            this._ToastrService.info('patient spend 0 days');
+            this._ToastrService.info('nothing paid');
           }
         })
       }

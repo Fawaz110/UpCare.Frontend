@@ -186,6 +186,10 @@ export class StaffService {
     return this._HttpClient.post(environment.baseUrl + 'room/book', data);
   }
 
+  payForBooking(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'payment/intent/booking', data);
+  }
+
   endBookingForPatient(data: object): Observable<any> {
     return this._HttpClient.post(environment.baseUrl + 'room/end/booking', data);
   }
