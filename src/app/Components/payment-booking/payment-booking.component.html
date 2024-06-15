@@ -1,6 +1,8 @@
 <section class="py-2 px-3">
     <div class="container">
         <h1 class="display-5">Complete Payment Process</h1>
+        <h1 class="display-6">You Spent <strong style="color:#3f51b5;">{{numberOfDays}}</strong> days since <strong style="color: #3f51b5;">{{startDate}}</strong></h1>
+        <h1 class="display-6">Total: <strong style="color: #3f51b5;">{{numberOfDays|currency:'EGP'}}</strong></h1>
         <form class="example-form" [formGroup]="cardDataForm" (ngSubmit)="submitForm()">
             <div class="row">
                 <div class="col-12 p-1">
@@ -15,7 +17,8 @@
                 <div class="col-6 p-1">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>Card Number</mat-label>
-                        <input type="text" formControlName="cardNumber" matInput placeholder="Enter Your Card Number...">
+                        <input type="text" formControlName="cardNumber" matInput
+                            placeholder="Enter Your Card Number...">
                         <mat-error
                             *ngIf="cardDataForm.get('cardNumber')?.getError('required') && cardDataForm.get('cardNumber')?.touched">
                             This field is <strong>required</strong></mat-error>
@@ -37,8 +40,7 @@
                 <div class="col-2 p-1">
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-label>EXP</mat-label>
-                        <input type="text" formControlName="EXP" matInput
-                            placeholder="MM/YY">
+                        <input type="text" formControlName="EXP" matInput placeholder="MM/YY">
                         <mat-error
                             *ngIf="cardDataForm.get('EXP')?.getError('required') && cardDataForm.get('EXP')?.touched">
                             This field is <strong>required</strong></mat-error>
@@ -50,7 +52,8 @@
                 <div class="col-12 p-2">
                     <div class="hstack justify-content-end">
 
-                        <button type="submit" [disabled]="cardDataForm.status == 'INVALID'" mat-raised-button color="primary">Complete Payment</button>
+                        <button type="submit" [disabled]="cardDataForm.status != 'VALID'" mat-raised-button
+                            color="primary">Complete Payment</button>
                     </div>
                 </div>
             </div>

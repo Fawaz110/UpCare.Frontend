@@ -141,7 +141,7 @@
               <div class="container">
                 <div class="cell mx-2 rounded mb-2">
                   <div class="row g-0 py-2 px-2 cursor-pointer justify-content-between align-items-center"
-                    routerLink="/patients/{{selectedBill?.payor?.id}}">
+                    title="Click to view patient profile" routerLink="/patients/{{selectedBill?.payor?.id}}">
                     <div class="col-6">
                       <div class="case-mode ms-2 px-5 py-1 rounded-pill">
                         <p class="m-0 text-center">{{selectedBill?.deliveredService}}</p>
@@ -154,6 +154,10 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="d-flex">
+                  <p class="text-muted me-3">{{getDateOnly(selectedBill?.dateTime)}}<i class="fa-solid fa-calendar-days ms-2"></i></p>
+                  <p class="text-muted me-3">{{getTimeOnly(selectedBill?.dateTime)}}<i class="fa-regular fa-clock ms-2"></i></p>
                 </div>
               </div>
 

@@ -23,8 +23,6 @@ export class PaymentDataComponent implements OnInit {
 
   submitForm(message: string = 'success') {
     console.log(this.cardDataForm.value);
-    // console.log('stripe', typeof(this.stripe), this.stripe);
-
     const model = {
       fK_PayorId: this.data?.patient?.id,
       deliveredService: "OfflineEmergency",
@@ -53,21 +51,6 @@ export class PaymentDataComponent implements OnInit {
         })
       }
     })
-    // Cancel Emergency And return failed
-
-
-    // try {
-    //   if (paymentResult.paymentIntent)
-    //     this._MatDialogRef.close('success')
-    //   else {
-
-    //   }
-
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
-
   }
 
   private confirmPaymentWithStripe() {
@@ -78,7 +61,7 @@ export class PaymentDataComponent implements OnInit {
     }
     this._StaffService.payForReservation(model).subscribe({
       next: response => {
-        console.log('payment request', response);
+        this._MatDialogRef.close('success');
       },
       error: error => {
         console.log('payment error', error);
@@ -99,7 +82,7 @@ export class PaymentDataComponent implements OnInit {
 
     this.cardDataForm = this._FormBuilder.group({
       nameOnCard: [this.data?.patient?.firstName, [Validators.required]],
-      cardNumber: ['', [Validators.required]],
+      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
       CVC: ['', [Validators.required]],
       EXP: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}$/)]],
     })

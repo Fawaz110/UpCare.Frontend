@@ -1,5 +1,5 @@
 <div class="patient-profile position-relative">
-  <button class="btn-health" mat-fab matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon" (click)="viewHealthRecord()">
+  <button  *ngIf="['nurse', 'doctor'].includes(_AuthService.user?.userRole!)" class="btn-health" mat-fab matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon" (click)="viewHealthRecord()">
     <mat-icon>bar_chart</mat-icon>
   </button>
   <div class="header row justify-content-end mb-3">

@@ -19,18 +19,21 @@
     <h1 class="mb-3" *ngIf="(rooms | searchForRoomNumber:roomNumber).length == 0">No Rooms Data Available</h1>
     <div class="emergency table-large container-fluid py-3 rounded shadow"
       *ngIf="(rooms | searchForRoomNumber:roomNumber).length != 0">
-
       <div class="row cell mx-2 rounded py-2 mb-2" *ngFor="let room of rooms | searchForRoomNumber: roomNumber">
         <div class="col-4">
           <div class="inner d-flex">
-            <div class="data">
+            <button mat-icon-button class="me-2" title="More about room number {{room?.id}}" (click)="openRoomDetails(room)" aria-label="Example icon button with a open in new tab icon">
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+            <div class="data hstack justify-content-center">
               <h5 class="mb-0">Room No. {{room?.id}}</h5>
             </div>
           </div>
         </div>
         <div class="col-8">
           <div class="inner d-flex align-items-center flex-row-reverse h-100">
-            <button mat-mini-fab color="warn" class="ms-2" (click)="updateRoom(room)">
+            
+            <button *ngIf="_AuthService.user?.userRole == 'receptionsit'" mat-mini-fab color="warn" class="ms-2" (click)="updateRoom(room)">
               <mat-icon>edit</mat-icon>
             </button>
             <div class="case-contact ms-2 px-3 py-1 rounded-pill">

@@ -58,6 +58,10 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddPrescriptionComponent } from './Components/add-prescription/add-prescription.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { RoomDetailsComponent } from './Components/room-details/room-details.component';
+import { ConfigComponent } from './Components/config/config.component';
+import { AddBookingComponent } from './Components/add-booking/add-booking.component';
+import { PaymentBookingComponent } from './Components/payment-booking/payment-booking.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +100,10 @@ import { MatChipsModule } from '@angular/material/chips';
     SearchBillPipe,
     HealthRecordComponent,
     AddPrescriptionComponent,
+    RoomDetailsComponent,
+    ConfigComponent,
+    AddBookingComponent,
+    PaymentBookingComponent,
   ],
   imports: [
     BrowserModule,

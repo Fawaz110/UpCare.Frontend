@@ -33,11 +33,11 @@
             </div>
             <div class="col-8">
               <div class="inner d-flex align-items-center flex-row-reverse h-100">
-                <button mat-mini-fab color="warn" class="ms-2" (click)="updateMedicine(medicine)">
-                  <mat-icon>edit</mat-icon>
-                </button>
                 <div class="case-contact ms-2 px-3 py-1 rounded-pill">
                   <p class="m-0">{{medicine?.price | currency:'EGP'}}</p>
+                </div>
+                <div class="case-mode ms-2 px-3 py-1 rounded-pill">
+                  <p class="m-0">{{medicine?.quantity}} items</p>
                 </div>
                 <div class="case-available ms-2 px-3 py-1 rounded-pill">
                   <p class="m-0">{{medicine?.category}}</p>

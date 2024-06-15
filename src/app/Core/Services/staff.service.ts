@@ -178,6 +178,18 @@ export class StaffService {
     return this._HttpClient.get(environment.baseUrl + 'room/all')
   }
 
+  getSpecificRoom(id: number): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + `room/${id}`);
+  }
+
+  addNewBooking(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'room/book', data);
+  }
+
+  endBookingForPatient(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'room/end/booking', data);
+  }
+
   cancelEmergency(data: object): Observable<any> {
     return this._HttpClient.post(environment.baseUrl + 'consultation/cancel', data)
   }

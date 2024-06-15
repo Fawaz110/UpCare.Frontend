@@ -22,10 +22,10 @@ export class EmergencyComponent /*implements OnInit*/ {
   // stripe: any
 
   constructor(
-    private _StaffService: StaffService, 
-    public _MatDialog: MatDialog, 
+    private _StaffService: StaffService,
+    public _MatDialog: MatDialog,
     private _ToastrService: ToastrService,
-    public _AuthService:AuthService
+    public _AuthService: AuthService
   ) {
     this.getEmergency()
     // var cardDataDialogRef = this._MatDialog.open(PaymentDataComponent)
@@ -58,16 +58,15 @@ export class EmergencyComponent /*implements OnInit*/ {
           var cardDataDialogRef = this._MatDialog.open(PaymentDataComponent, {
             data: response.data
           })
-          cardDataDialogRef.afterClosed().subscribe({
-            next: message => {
-              if (message == 'success') {
-                this.patientSearchTerm = ''
-                this._ToastrService.success('Payment Succeeded')
-              } else {
-                this._ToastrService.error('Payment Failed')
-              }
+          cardDataDialogRef.afterClosed().subscribe(message => {
+            if (message == 'success') {
+              this.patientSearchTerm = ''
+              this._ToastrService.success('Payment Succeeded')
+            } else {
+              this._ToastrService.error('Payment Failed')
             }
-          })
+          }
+          )
         },
         error: err => {
           console.log(err);
