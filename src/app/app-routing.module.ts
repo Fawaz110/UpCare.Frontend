@@ -18,6 +18,7 @@ import { ReviewsComponent } from './Components/reviews/reviews.component';
 import { LoginComponent } from './Components/login/login.component';
 import { NotfoundComponent } from './Components/notfound/notfound.component';
 import { authGuard } from './Core/Guards/auth.guard';
+import { MessagesComponent } from './Components/messages/messages.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
       { path: 'schedule', component: ScheduleComponent },
       { path: 'bills', component: BillsComponent },
       { path: 'reviews', component: ReviewsComponent },
+      { path: 'messages', component: MessagesComponent },
     ]
   },
   { path: 'login', component: LoginComponent },

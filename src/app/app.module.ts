@@ -62,6 +62,8 @@ import { RoomDetailsComponent } from './Components/room-details/room-details.com
 import { ConfigComponent } from './Components/config/config.component';
 import { AddBookingComponent } from './Components/add-booking/add-booking.component';
 import { PaymentBookingComponent } from './Components/payment-booking/payment-booking.component';
+import { MessagesComponent } from './Components/messages/messages.component';
+import { AddCheckupComponent } from './Components/add-checkup/add-checkup.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,8 @@ import { PaymentBookingComponent } from './Components/payment-booking/payment-bo
     ConfigComponent,
     AddBookingComponent,
     PaymentBookingComponent,
+    MessagesComponent,
+    AddCheckupComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@
         </div>
         <ul class="list-unstyled ms-3">
             <li class="px-2 mb-2" *ngIf="['admin', 'receptionist'].includes(_AuthService.user?.userRole!)">
-                <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/emergency" routerLinkActive="nav-link-acive">
+                <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/radiologyLab" routerLinkActive="nav-link-acive">
                     <i class="position-absolute fa-solid fa-caret-right"></i>
                     <div class="link-inner">
                         <div class="d-flex align-items-center">
@@ -26,6 +26,19 @@
                                 <i class="fa-solid fa-chart-line"></i>
                             </div>
                             <p class="m-0">Dashboard</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="px-2 mb-2" *ngIf="_AuthService.user?.userRole == 'doctor'">
+                <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/messages" routerLinkActive="nav-link-acive">
+                    <i class="position-absolute fa-solid fa-caret-right"></i>
+                    <div class="link-inner">
+                        <div class="d-flex align-items-center">
+                            <div class="outer d-flex align-items-center justify-content-center me-2">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <p class="m-0">Messages</p>
                         </div>
                     </div>
                 </a>

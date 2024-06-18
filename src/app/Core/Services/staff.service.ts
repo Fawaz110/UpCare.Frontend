@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
@@ -16,6 +16,10 @@ export class StaffService {
 
   getSpecialities(): Observable<any> {
     return this._HttpClient.get(environment.baseUrl + 'doctor/specialities')
+  }
+
+  getAllCheckup(): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + 'checkup/all');
   }
 
   getAllEmergency(): Observable<any> {
@@ -94,6 +98,10 @@ export class StaffService {
     return this._HttpClient.get(environment.baseUrl + `Chat/admin/receive/doctor/${doctorId}?id=${this._AuthService.user?.id}&role=0`)
   }
 
+  getSpecificAdminMessagesForDoctor(adminId: string): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + `chat/doctor/receive/admin/${adminId}?id=${this._AuthService.user?.id}&role=${2}`)
+  }
+
   getMessagesFromPatients(id: string): Observable<any> {
     return this._HttpClient.get(environment.baseUrl + `/chat/doctor/receive/patients?role=2&id=${id}`)
   }
@@ -120,6 +128,26 @@ export class StaffService {
 
   addDoctor(data: object): Observable<any> {
     return this._HttpClient.post(environment.baseUrl + 'doctor/add', data);
+  }
+
+  addCheckup(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'checkup/add', data);
+  }
+
+  updateCheckup(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'checkup/update', data);
+  }
+
+  deleteCheckup(id: number): Observable<any> {
+    return this._HttpClient.delete(environment.baseUrl + `checkup/delete?id=${id}`);
+  }
+
+  addCheckupResult(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'checkup/add/result', {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data'
+      })
+    })
   }
 
   addPrescription(data: object): Observable<any> {

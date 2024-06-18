@@ -32,7 +32,6 @@ export class PatientsComponent implements OnInit {
     this._StaffService.getAllPatients().subscribe({
       next: response => {
         this.patients = response
-        console.log(this.patients);
       }
     })
   }
