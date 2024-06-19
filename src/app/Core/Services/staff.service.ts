@@ -142,12 +142,44 @@ export class StaffService {
     return this._HttpClient.delete(environment.baseUrl + `checkup/delete?id=${id}`);
   }
 
-  addCheckupResult(data: object): Observable<any> {
-    return this._HttpClient.post(environment.baseUrl + 'checkup/add/result', {
+  addCheckupResult(data: FormData): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'checkup/add/result', data, {
       headers: new HttpHeaders({
         'enctype': 'multipart/form-data'
       })
     })
+  }
+
+  addRadiologyResult(data: FormData): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'radiology/add/result', data, {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data'
+      })
+    })
+  }
+
+  getCheckupsToDo(): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + 'checkup/paid/to/do');
+  }
+
+  getAllCheckupResult(): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + 'checkup/results');
+  }
+
+  getAllRadiologyResult(): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + 'radiology/results');
+  }
+
+  getCheckupsResultForSpecificPatient(id: string): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + `checkup/results/${id}`);
+  }
+
+  getRadiologiesResultForSpecificPatient(id: string): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + `radiology/results/${id}`);
+  }
+
+  getRadiologiesToDo(): Observable<any> {
+    return this._HttpClient.get(environment.Token + 'radiology/paid/to/do');
   }
 
   addPrescription(data: object): Observable<any> {

@@ -1,5 +1,6 @@
 <div class="patient-profile position-relative">
-  <button  *ngIf="['nurse', 'doctor'].includes(_AuthService.user?.userRole!)" class="btn-health" mat-fab matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon" (click)="viewHealthRecord()">
+  <button *ngIf="['nurse', 'doctor'].includes(_AuthService.user?.userRole!)" class="btn-health" mat-fab
+    matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon" (click)="viewHealthRecord()">
     <mat-icon>bar_chart</mat-icon>
   </button>
   <div class="header row justify-content-end mb-3">
@@ -16,7 +17,8 @@
   <h1 class="header__title">Patient profile</h1>
   <div class="patient-profile__container">
     <div class="patient-profile__info">
-      <img class="w-100 rounded" src="assets/user-image.jpeg" alt="user">
+      <img [src]="(patientHistory?.patientInfo?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+        class="w-100 rounded" alt="">
       <div class="profile__card">
         <h4>{{patientHistory?.patientInfo?.firstName}} {{patientHistory?.patientInfo?.lastName}}</h4>
         <p *ngIf="calculateAge(patientHistory?.patientInfo?.dateOfBirth) > 0">
@@ -184,9 +186,7 @@
     </div>
     <div class="inner h-100 d-flex justify-content-center align-items-center flex-column"
       *ngIf="messagesList?.length == 0">
-      <img class="w-50 h-50"
-        src="./assets/nothing-selected.jpg"
-        alt="">
+      <img class="w-50 h-50" src="./assets/nothing-selected.jpg" alt="">
       <h5 style="color: #0255e3;">Send Messages To Start Chat</h5>
     </div>
   </div>

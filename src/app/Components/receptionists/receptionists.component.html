@@ -20,11 +20,13 @@
       <div class="col-5">
         <div class="emergency table-large container-fluid py-3 rounded shadow"
           *ngIf="(receptionists | searchForPatient: searchTerm).length > 0">
-          <div class="cell mx-2 rounded mb-2" *ngFor="let receptionist of (receptionists | searchForPatient: searchTerm)">
+          <div class="cell mx-2 rounded mb-2"
+            *ngFor="let receptionist of (receptionists | searchForPatient: searchTerm)">
             <div class="row g-0 py-2 px-2" (click)="selectNurse(receptionist.id)">
               <div class="col-8">
                 <div class="inner d-flex">
-                  <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2" alt="">
+                  <img [src]="(receptionist?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                    style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                   <div class="data">
                     <h5 class="mb-0">{{receptionist.firstName}} {{receptionist.lastName}}</h5>
                   </div>
@@ -44,7 +46,8 @@
         <div class="emergency table-large rounded shadow position-relative">
           <div class="header-chat mb-1 px-3 py-2 border-bottom d-flex">
             <div class="header-info d-flex" *ngIf="isOpen">
-              <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2 shadow" alt="">
+              <img [src]="(openedNurse?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                style="height: 50px; width: 50px;" class="rounded me-2" alt="">
               <div class="data">
                 <h5 class="mb-0">{{openedNurse?.firstName}} {{openedNurse?.lastName}}</h5>
                 <p class="text-muted m-0">Nurse</p>
@@ -114,9 +117,7 @@
           <div class="no-messages px-3 d-flex justify-content-center align-items-center" style="height: 58vh;"
             *ngIf="!isOpen">
             <div class="body w-50 text-center">
-              <img class="w-100"
-                src="./assets/nothing-selected.jpg"
-                alt="">
+              <img class="w-100" src="./assets/nothing-selected.jpg" alt="">
               <h2 class="display-6">No Receptionist Selected</h2>
             </div>
           </div>

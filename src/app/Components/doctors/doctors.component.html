@@ -24,7 +24,9 @@
             <div class="row g-0 py-2 px-2" (click)="selectChat(doctor.id)">
               <div class="col-8">
                 <div class="inner d-flex">
-                  <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2" alt="">
+                  <img [src]="(doctor?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                    style="height: 50px; width: 50px;" class="rounded me-2" alt="">
+
                   <div class="data">
                     <h5 class="mb-0">{{doctor.firstName}} {{doctor.lastName}}</h5>
                     <p class="text-muted m-0">{{doctor.speciality}}</p>
@@ -44,7 +46,8 @@
         <div class="emergency table-large rounded shadow position-relative">
           <div class="header-chat mb-1 px-3 py-2 border-bottom d-flex">
             <div class="header-info d-flex" *ngIf="isOpen">
-              <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2 shadow" alt="">
+              <img [src]="(openedDoctor?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                style="height: 50px; width: 50px;" class="rounded me-2" alt="">
               <div class="data">
                 <h5 class="mb-0">{{openedDoctor?.firstName}} {{openedDoctor?.lastName}}</h5>
                 <p class="text-muted m-0">{{openedDoctor?.speciality}}</p>
@@ -54,7 +57,8 @@
               <h5>Select a chat to view info</h5>
             </div>
 
-            <div class="input-chat border-top px-3 py-2 position-absolute bottom-0 z-3 bg-white" style="left: 0; right: 0;">
+            <div class="input-chat border-top px-3 py-2 position-absolute bottom-0 z-3 bg-white"
+              style="left: 0; right: 0;">
               <form [formGroup]="sendMessageForm" (ngSubmit)="sendMessage()">
                 <input type="text" formControlName="content" class="form-control border-0 shadow-none"
                   placeholder="Type..." [disabled]="!isOpen">
@@ -82,9 +86,7 @@
           <div class="no-messages px-3 d-flex justify-content-center align-items-center" style="height: 58vh;"
             *ngIf="!isOpen">
             <div class="body w-50 text-center">
-              <img class="w-100"
-                src="./assets/nothing-selected.jpg"
-                alt="">
+              <img class="w-100" src="./assets/nothing-selected.jpg" alt="">
               <h2 class="display-6">No Chat Selected</h2>
             </div>
           </div>

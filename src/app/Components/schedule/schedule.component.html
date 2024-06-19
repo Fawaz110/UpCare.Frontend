@@ -26,7 +26,8 @@
               <div class="row g-0 py-2 px-2" (click)="selectDoctorSchedule(doctor?.id)">
                 <div class="col-8">
                   <div class="inner d-flex">
-                    <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2" alt="">
+                    <img [src]="(doctor?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                      style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                     <div class="data">
                       <h5 class="mb-0">{{doctor?.firstName}} {{doctor?.lastName}}</h5>
                       <p class="text-muted m-0">{{doctor?.speciality}}</p>
@@ -48,7 +49,8 @@
             <div class="main-header p-2 border-bottom" *ngIf="_AuthService.user?.userRole != 'doctor'">
               <div class="container-fluid">
                 <div class="d-flex" *ngIf="isOpen">
-                  <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2" alt="">
+                  <img [src]="(selectedDoctor?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                    style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                   <div class="info">
                     <h5 class="m-0">{{selectedDoctor?.firstName}} {{selectedDoctor?.lastName}}</h5>
                     <p class="text-muted m-0">{{selectedDoctor?.speciality}}</p>
@@ -75,7 +77,9 @@
                     (click)="viewPatientProfile(item?.patient?.id)" title="Click To View Patient Profile">
                     <div class="col-4">
                       <div class="d-flex">
-                        <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2" alt="">
+                        <img
+                          [src]="(item?.patient?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                          style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                         <div class="info">
                           <h5 class="m-0">{{item?.patient?.firstName}} {{item?.patient?.lastName}}</h5>
                           <p class="m-0 text-muted">{{calculateAge(item?.patient?.dateOfBirth)}} Years old</p>
@@ -93,9 +97,7 @@
               <div class="no-messages px-3 d-flex justify-content-center align-items-center" style="height: 58vh;"
                 *ngIf="(!isOpen) || openedSchedule?.length == 0">
                 <div class="body w-50 text-center">
-                  <img class="w-50"
-                    src="./assets/nothing-selected.jpg"
-                    alt="">
+                  <img class="w-50" src="./assets/nothing-selected.jpg" alt="">
                   <h2 class="display-6"
                     *ngIf="(isOpen && (openedSchedule?.length == 0)) || _AuthService.user?.userRole == 'doctor'">No
                     Reservations Recorded</h2>
@@ -105,125 +107,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="header-chat mb-1 px-3 py-2 border-bottom d-flex">
-            <div class="header-info d-flex" *ngIf="isOpen">
-              <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2 shadow" alt="">
-              <div class="data">
-                <h5 class="mb-0">{{openedDoctor?.firstName}} {{openedDoctor?.lastName}}</h5>
-                <p class="text-muted m-0">{{openedDoctor?.speciality}}</p>
-              </div>
-            </div>
-            <div class="header-info d-flex py-2" *ngIf="!isOpen">
-              <h5>Select a chat to view info</h5>
-            </div>
-
-            <div class="input-chat border-top px-3 py-2 position-absolute bottom-0 z-3 bg-white" style="left: 0; right: 0;">
-              <form [formGroup]="sendMessageForm" (ngSubmit)="sendMessage()">
-                <input type="text" formControlName="content" class="form-control border-0 shadow-none"
-                  placeholder="Type..." [disabled]="!isOpen">
-                <button type="submit" class="btn-send btn rounded-circle" [disabled]="!isOpen"><i
-                    class="fa-solid fa-paper-plane"></i></button>
-              </form>
-            </div>
-          </div> -->
-
-          <!-- <div class="row">
-            <div class="col-12">
-              <div class="top d-flex justify-content-between">
-                <div class="d-flex"><img src="./assets/download.png"
-                    style="height: 50px; width: 50px; border-radius: 10px;" class=" me-2" alt="">
-                  <div class="">
-                    <h5 class="mb-0">{{selectedChat!.recepientName}}</h5>
-                    <p class="text-primary">Gastroenterology</p>
-                  </div>
-
-                </div>
-              </div>
-              <hr>
-
-              <div class="row cell rounded py-2 mb-2">
-                <div class="col-8">
-                  <div class="inner d-flex">
-                    <img src="./assets/download.png" style="height: 50px; width: 50px; border-radius: 10px;"
-                      class=" me-2" alt="">
-                    <div class="data">
-                      <p class="mb-0 text-primary">Mustafa Mohamed</p>
-                      <p class=" m-0" style="color:#34D1BF;">9:00 - 9:30</p>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-4">
-                  <div class="inner d-flex align-items-center flex-row-reverse h-100">
-                    <div class="case-mode ms-2 py-1 rounded-pill" style="width: 8rem;">
-                      <p class="m-0 fs-5 text-center">Chat</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row cell rounded py-2 mb-2">
-                <div class="col-8">
-                  <div class="inner d-flex">
-                    <img src="./assets/download.png" style="height: 50px; width: 50px; border-radius: 10px;"
-                      class=" me-2" alt="">
-                    <div class="data">
-                      <p class="mb-0 text-primary">Mustafa Mohamed</p>
-                      <p class=" m-0" style="color:#34D1BF;">9:30 - 10:00</p>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-4">
-                  <div class="inner d-flex align-items-center flex-row-reverse h-100">
-                    <div class="case-mode ms-2 py-1 rounded-pill" style="width: 8rem;">
-                      <p class="m-0 fs-5 text-center">Chat</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row cell rounded py-2 mb-2">
-                <div class="col-8">
-                  <div class="inner d-flex">
-                    <img src="./assets/download.png" style="height: 50px; width: 50px; border-radius: 10px;"
-                      class=" me-2" alt="">
-                    <div class="data">
-                      <p class="mb-0 text-primary">Mustafa Mohamed</p>
-                      <p class=" m-0" style="color:#34D1BF;">10:00 - 10:30</p>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-4">
-                  <div class="inner d-flex align-items-center flex-row-reverse h-100">
-                    <div class="case-mode ms-2 py-1 rounded-pill" style="width: 8rem;">
-                      <p class="m-0 fs-5 text-center">Offline</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="row cell rounded py-2 mb-2">
-                <div class="col-8">
-                  <div class="inner d-flex">
-                    <img src="./assets/download.png" style="height: 50px; width: 50px; border-radius: 10px;"
-                      class=" me-2" alt="">
-                    <div class="data">
-                      <p class="mb-0 text-primary">Mustafa Mohamed</p>
-                      <p class=" m-0" style="color:#34D1BF;">10:30 - 11:00</p>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-4">
-                  <div class="inner d-flex align-items-center flex-row-reverse h-100">
-                    <div class="case-mode ms-2 py-1 rounded-pill" style="width: 8rem;">
-                      <p class="m-0 fs-5 text-center">Video</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
         </div>
       </div>
     </div>

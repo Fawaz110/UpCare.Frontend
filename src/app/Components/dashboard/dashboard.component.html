@@ -37,7 +37,8 @@
                                         <ng-template carouselSlide [id]="speciality.speciality">
                                             <div class="inner">
                                                 <h5>{{speciality.speciality}}</h5>
-                                                <p style="color: #2662F0;">{{speciality.doctorWithSPeciality}} Doctors</p>
+                                                <p style="color: #2662F0;">{{speciality.doctorWithSPeciality}} Doctors
+                                                </p>
                                             </div>
                                         </ng-template>
                                     </ng-container>
@@ -113,14 +114,15 @@
                     <div class="head d-flex justify-content-between align-items-center mb-2">
                         <h3 *ngIf="!(services?.length == 0)">Recent Services</h3>
                         <h3 *ngIf="services?.length == 0">No Recent Bills Exists</h3>
-                        <a *ngIf="!(services?.length == 0)" class="text-muted text-decoration-none" routerLink="/bills">View Bills<i
-                                class="fa-solid fa-chevron-right ms-2"></i></a>
+                        <a *ngIf="!(services?.length == 0)" class="text-muted text-decoration-none"
+                            routerLink="/bills">View Bills<i class="fa-solid fa-chevron-right ms-2"></i></a>
                     </div>
-                    
+
                     <div class="row cell mx-2 rounded py-2 mb-2" *ngFor="let bill of services">
                         <div class="col-7">
                             <div class="inner d-flex">
-                                <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2" alt="">
+                                <img [src]="(bill?.payor?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                                    style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                                 <div class="data">
                                     <h5 class="mb-0">{{bill?.payor?.firstName}} {{bill?.payor?.lastName}}</h5>
                                     <p class="text-muted m-0">{{bill?.deliveredService}}</p>
@@ -131,8 +133,11 @@
                             <div class="inner d-flex align-items-center flex-column h-100">
                                 <p class="m-0 ms-auto ">{{bill?.paidMoney}} <span style="color: #34D1BF;">EGP</span></p>
 
-                                <p class="m-0 ms-auto small" *ngIf="getDateOnly() == getDateOnly(bill?.dateTime)">{{getTimeOnly(bill?.dateTime)}} <i class="fa-regular fa-clock text-muted"></i></p>
-                                <p class="m-0 ms-auto small" *ngIf="getDateOnly() != getDateOnly(bill?.dateTime)">{{getDateOnly(bill?.dateTime)}} {{getTimeOnly(bill?.dateTime)}} <i class="fa-regular fa-clock text-muted"></i></p>
+                                <p class="m-0 ms-auto small" *ngIf="getDateOnly() == getDateOnly(bill?.dateTime)">
+                                    {{getTimeOnly(bill?.dateTime)}} <i class="fa-regular fa-clock text-muted"></i></p>
+                                <p class="m-0 ms-auto small" *ngIf="getDateOnly() != getDateOnly(bill?.dateTime)">
+                                    {{getDateOnly(bill?.dateTime)}} {{getTimeOnly(bill?.dateTime)}} <i
+                                        class="fa-regular fa-clock text-muted"></i></p>
                             </div>
                         </div>
                     </div>
@@ -143,18 +148,20 @@
                     <div class="head d-flex justify-content-between align-items-center mb-2">
                         <h3 *ngIf="feedbacks.length > 0">Recent Feedbacks</h3>
                         <h3 *ngIf="!(feedbacks.length > 0)">No Feedback Exists</h3>
-                        <a *ngIf="feedbacks.length > 0" class="text-muted text-decoration-none" routerLink="/reviews">View feedbacks<i
-                                class="fa-solid fa-chevron-right ms-2"></i></a>
+                        <a *ngIf="feedbacks.length > 0" class="text-muted text-decoration-none"
+                            routerLink="/reviews">View feedbacks<i class="fa-solid fa-chevron-right ms-2"></i></a>
                     </div>
                     <div class="row cell mx-2 rounded py-2 mb-2" *ngFor="let feedback of feedbacks">
                         <div class="col-1">
-                            <img src="./assets/user-image.jpeg" style="height: 50px; width: 50px;" class="rounded me-2" alt="">
+                            <img [src]="(feedback?.patient?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                                style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                         </div>
                         <div class="col-11">
                             <div class="inner d-flex m-auto w-100">
                                 <div class="data w-100 text-truncate">
                                     <div class="head d-flex justify-content-between">
-                                        <h5 class="mb-0">{{feedback?.patient?.firstName}} {{feedback?.patient?.lastName}}</h5>
+                                        <h5 class="mb-0">{{feedback?.patient?.firstName}}
+                                            {{feedback?.patient?.lastName}}</h5>
                                         <p class="m-0">Rating: {{feedback?.rate}}</p>
                                     </div>
                                     <p class="text-muted m-0 text-nowrap text-truncate">{{feedback?.comment}}</p>

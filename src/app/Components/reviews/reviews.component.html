@@ -21,7 +21,8 @@
             <div class="row g-0 py-2 px-2" (click)="selectReview(review.id)">
               <div class="col-8">
                 <div class="inner d-flex">
-                  <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2" alt="">
+                  <img [src]="(review?.patient?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                    style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                   <div class="data overflow-hidden">
                     <h5 class="mb-0">{{review?.patient?.firstName}} {{review?.patient?.lastName}}</h5>
                     <p class="text-muted m-0 text-nowrap text-truncate">{{review?.comment}}</p>
@@ -43,15 +44,17 @@
           <div class="header-chat mb-1 px-3 py-2 border-bottom d-flex">
             <div class="header-info w-100 d-flex justify-content-between" *ngIf="isOpen">
               <div class="d-flex">
-                <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2 shadow" alt="">
+                <img
+                  [src]="(selectedFeedback?.patient?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                  style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                 <div class="data flex-grow-1">
                   <h5 class="mb-0">{{selectedFeedback?.patient?.firstName}} {{selectedFeedback?.patient?.lastName}}</h5>
                   <p class="text-muted small m-0">Rate: {{selectedFeedback?.rate}} out of 5</p>
                 </div>
               </div>
               <div class="inner d-flex align-items-center flex-row-reverse h-100">
-                <button class="btn-chat btn rounded-pill" routerLink="/patients/{{selectedFeedback?.patient?.id}}">Click to view patient profile <i
-                    class="fa-solid fa-angle-right ms-2"></i></button>
+                <button class="btn-chat btn rounded-pill" routerLink="/patients/{{selectedFeedback?.patient?.id}}">Click
+                  to view patient profile <i class="fa-solid fa-angle-right ms-2"></i></button>
               </div>
             </div>
             <div class="header-info d-flex py-2" *ngIf="!isOpen">
@@ -69,9 +72,7 @@
           <div class="no-messages px-3 d-flex justify-content-center align-items-center" style="height: 58vh;"
             *ngIf="!isOpen">
             <div class="body w-50 text-center">
-              <img class="w-100"
-                src="./assets/nothing-selected.jpg"
-                alt="">
+              <img class="w-100" src="./assets/nothing-selected.jpg" alt="">
               <h2 class="display-6">No Feedback Selected</h2>
             </div>
           </div>

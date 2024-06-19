@@ -28,7 +28,8 @@
               <div class="row g-0 py-2 px-2" (click)="selectBill(bill?.id)">
                 <div class="col-8">
                   <div class="inner d-flex">
-                    <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2" alt="">
+                    <img [src]="(bill?.payor?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                      style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                     <div class="data">
                       <h5 class="mb-0">{{bill?.payor?.firstName}} {{bill?.payor?.lastName}}</h5>
                       <p class="text-muted m-0">{{bill?.deliveredService}}</p>
@@ -50,7 +51,8 @@
             <div class="header-chat mb-1 px-3 py-2 border-bottom d-flex">
               <div class="header-info d-flex justify-content-between" *ngIf="isOpen">
                 <div class="d-flex">
-                  <img src="./assets/user-image.jpeg" style="height: 50px;" class="rounded me-2 shadow" alt="">
+                  <img [src]="(selectedBill?.payor?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                    style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                   <div class="data">
                     <h5 class="mb-0">{{selectedBill?.payor?.firstName}} {{selectedBill?.payor?.lastName}}</h5>
                     <p class="text-muted small m-0">Total: <span
@@ -156,8 +158,10 @@
                   </div>
                 </div>
                 <div class="d-flex">
-                  <p class="text-muted me-3">{{getDateOnly(selectedBill?.dateTime)}}<i class="fa-solid fa-calendar-days ms-2"></i></p>
-                  <p class="text-muted me-3">{{getTimeOnly(selectedBill?.dateTime)}}<i class="fa-regular fa-clock ms-2"></i></p>
+                  <p class="text-muted me-3">{{getDateOnly(selectedBill?.dateTime)}}<i
+                      class="fa-solid fa-calendar-days ms-2"></i></p>
+                  <p class="text-muted me-3">{{getTimeOnly(selectedBill?.dateTime)}}<i
+                      class="fa-regular fa-clock ms-2"></i></p>
                 </div>
               </div>
 
@@ -182,9 +186,7 @@
             <div class="no-messages px-3 d-flex justify-content-center align-items-center" style="height: 58vh;"
               *ngIf="!isOpen">
               <div class="body w-50 text-center">
-                <img class="w-100"
-                  src="./assets/nothing-selected.jpg"
-                  alt="">
+                <img class="w-100" src="./assets/nothing-selected.jpg" alt="">
                 <h2 class="display-6">No bill Selected</h2>
               </div>
             </div>

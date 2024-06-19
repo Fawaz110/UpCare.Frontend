@@ -22,8 +22,8 @@
                                     <div class="row w-75 me-2">
                                         <div class="col-8">
                                             <div class="inner d-flex">
-                                                <img src="./assets/user-image.jpeg" style="height: 50px;"
-                                                    class="rounded me-2" alt="">
+                                                <img [src]="(patientBooking?.patient?.gender == 0)?'./assets/user-male.svg':'./assets/user-female.svg'"
+                                                    style="height: 50px; width: 50px;" class="rounded me-2" alt="">
                                                 <div class="data">
                                                     <h5 class="mb-0">{{patientBooking?.patient?.firstName}}</h5>
                                                     <p class="text-muted m-0"
@@ -62,7 +62,8 @@
                                             <button mat-raised-button color="primary" class="me-2"
                                                 (click)="goToPatientProfile(patientBooking?.patient?.id)">View Patient
                                                 Profile</button>
-                                            <button *ngIf="_AuthService.user?.userRole == 'receptionist'" mat-raised-button color="warn" class="me-2"
+                                            <button *ngIf="_AuthService.user?.userRole == 'receptionist'"
+                                                mat-raised-button color="warn" class="me-2"
                                                 (click)="endBooking(patientBooking?.roomInfo, i)">End Booking</button>
                                         </div>
                                     </div>
