@@ -64,6 +64,10 @@ import { AddBookingComponent } from './Components/add-booking/add-booking.compon
 import { PaymentBookingComponent } from './Components/payment-booking/payment-booking.component';
 import { MessagesComponent } from './Components/messages/messages.component';
 import { AddCheckupComponent } from './Components/add-checkup/add-checkup.component';
+import { UploadCheckupResultComponent } from './Components/upload-checkup-result/upload-checkup-result.component';
+import { UploadRadiologyResultComponent } from './Componentts/upload-radiology-result/upload-radiology-result.component';
+import { CheckupSearchPipe } from './Core/Pipes/checkup-search.pipe';
+import { AddRadiologyComponent } from './Components/add-radiology/add-radiology.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +112,10 @@ import { AddCheckupComponent } from './Components/add-checkup/add-checkup.compon
     PaymentBookingComponent,
     MessagesComponent,
     AddCheckupComponent,
+    UploadCheckupResultComponent,
+    UploadRadiologyResultComponent,
+    CheckupSearchPipe,
+    AddRadiologyComponent,
   ],
   imports: [
     BrowserModule,

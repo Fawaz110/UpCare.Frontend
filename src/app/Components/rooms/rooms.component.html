@@ -8,7 +8,7 @@
             style="border: none; outline: none; box-shadow: none;">
         </div>
       </div>
-      <button mat-mini-fab color="primary" class="me-2" (click)="addRoom()">
+      <button *ngIf="_AuthService.user?.userRole == 'receptionist'" mat-mini-fab color="primary" class="me-2" (click)="addRoom()">
         <mat-icon>add</mat-icon>
       </button>
       <div class="col-2">

@@ -162,6 +162,22 @@ export class StaffService {
     return this._HttpClient.get(environment.baseUrl + 'checkup/paid/to/do');
   }
 
+  getAllRadiologies(): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + 'radiology/all')
+  }
+
+  deleteRadiology(id: number): Observable<any> {
+    return this._HttpClient.delete(environment.baseUrl + `radiology/delete?id=${id}`)
+  }
+
+  addRadiology(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'radiology/add', data)
+  }
+
+  updateRadiology(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'radiology/update', data);
+  }
+
   getAllCheckupResult(): Observable<any> {
     return this._HttpClient.get(environment.baseUrl + 'checkup/results');
   }
@@ -179,7 +195,7 @@ export class StaffService {
   }
 
   getRadiologiesToDo(): Observable<any> {
-    return this._HttpClient.get(environment.Token + 'radiology/paid/to/do');
+    return this._HttpClient.get(environment.baseUrl + 'radiology/paid/to/do');
   }
 
   addPrescription(data: object): Observable<any> {

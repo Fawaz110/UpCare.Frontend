@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { StaffService } from 'src/app/Core/Services/staff.service';
 import { AddCheckupComponent } from '../add-checkup/add-checkup.component';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { UploadCheckupResultComponent } from '../upload-checkup-result/upload-checkup-result.component';
 declare var $: any;
 
 @Component({
@@ -14,9 +15,8 @@ declare var $: any;
 export class CheckupComponent implements OnInit {
 
   checkupList: any[] = []
+  checkupListToDo: any[] = []
   searchTerm: string = ''
-  selectedFile!: File
-  resultFormData!: FormGroup
 
   constructor(
     private _StaffService: StaffService,
@@ -25,48 +25,21 @@ export class CheckupComponent implements OnInit {
     private _FormBuilder: FormBuilder
   ) { }
 
-  onFileSelected(event: any) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-    }
-
-    console.log(this.selectedFile);
-  }
-
-  submitForm(form: NgForm) {
-    console.log(form.value.checkupId, typeof(form.value.checkupId));
-    console.log('form', form.value);
-    const formData = new FormData();
-    
-    // Append form values to FormData
-    Object.keys(form.value).forEach(key => {
-      formData.append(key, form.value[key]);
-      console.log(formData);
+  uploadResult(patient: any, checkup: any, index: number) {
+    const dialogRef = this._MatDialog.open(UploadCheckupResultComponent, {
+      data: {
+        checkup: checkup,
+        patient: patient
+      }
     });
-    // Append the selected file to FormData
-    if (this.selectedFile) {
-      formData.append('result', this.selectedFile, this.selectedFile.name);
-      console.log(formData);
-    }
-    console.log('form-data', formData);
-    this._StaffService.addCheckupResult(formData).subscribe({
-      next: response => {
-        console.log(response);
-      },
-      error: error => {
-        console.log(error);
+
+    dialogRef.afterClosed().subscribe(message => {
+      console.log(message);
+      if(message == 'uploaded'){
+        this._ToastrService.success('Result uploaded successfully')
+        this.getCheckupsToDo()
       }
     })
-    // console.log(this.resultFormData.value);
-    // this._StaffService.addCheckupResult(this.selectedFile).subscribe({
-    //   next: response => {
-    //     console.log(response);
-    //   },
-    //   error: error => {
-    //     console.log(error);
-    //   }
-    // })
   }
 
   edit(checkup: any) {
@@ -76,8 +49,8 @@ export class CheckupComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(message => {
       if (message == 'updated') {
-        this.getAllCheckups()
         this._ToastrService.success('Checkup updated successfully')
+        this.getAllCheckups()
       }
     })
   }
@@ -119,12 +92,35 @@ export class CheckupComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.resultFormData = this._FormBuilder.group({
-      patientId: ['', [Validators.required]],
-      checupId: [0, Validators.required],
-      result: [null, [Validators.required]]
+  getCheckupsToDo() {
+    this._StaffService.getCheckupsToDo().subscribe({
+      next: response => {
+        this.checkupListToDo = response
+        console.log(this.checkupListToDo);
+
+      },
+      error: error => {
+        console.log(error);
+      }
     })
+  }
+
+  getTimeOnly(dateTime: any): any {
+    let date = new Date(dateTime);
+    return date.toLocaleTimeString();
+  }
+  getDateOnly(dateTime?: any): any {
+    if (dateTime == undefined) {
+      let today = new Date();
+      return today.toLocaleDateString();
+    } else {
+      let date = new Date(dateTime);
+      return date.toLocaleDateString();
+    }
+  }
+
+  ngOnInit(): void {
     this.getAllCheckups()
+    this.getCheckupsToDo()
   }
 }
