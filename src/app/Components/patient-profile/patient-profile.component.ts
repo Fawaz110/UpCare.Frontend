@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HealthRecordComponent } from '../health-record/health-record.component';
 import { AddPrescriptionComponent } from '../add-prescription/add-prescription.component';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 declare var $: any
 @Component({
   selector: 'app-patient-profile',
@@ -30,7 +31,8 @@ export class PatientProfileComponent implements OnInit {
     private _FormBuilder: FormBuilder,
     public _AuthService: AuthService,
     private _MatDialog: MatDialog,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _HttpClient: HttpClient
   ) {
     _ActivatedRoute.params.subscribe({
       next: (params) => {
@@ -117,6 +119,21 @@ export class PatientProfileComponent implements OnInit {
     nav: true
   }
 
+  download(url: string, name: string) {
+    this._HttpClient.get(url, { responseType: 'blob' }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Download error:', error);
+    });
+  }
+
   displayChat(id: string) {
     console.log('chat opened');
     $('#chatDiv').fadeIn(200);
@@ -187,7 +204,7 @@ export class PatientProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(message => {
       if (message == 'success') {
         this._ToastrService.success('Prescription Added Successfully')
-        
+
         this._StaffService.getPatientProfile(this.patientHistory?.patientInfo?.id).subscribe({
           next: response => {
             this.patientHistory = response

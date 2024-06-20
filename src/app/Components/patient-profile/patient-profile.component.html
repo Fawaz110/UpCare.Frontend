@@ -90,11 +90,14 @@
                 <ng-container *ngFor="let checkupItem of patientHistory?.checkups">
                   <ng-template carouselSlide [id]="checkupItem?.checkup?.id">
                     <div class="inner">
-                      <h5>{{checkupItem?.checkup?.name}}</h5>
                       <div class="d-flex justify-content-between">
-                        <p class="m-0 text-muted small">{{checkupItem?.checkup?.price | currency:'EGP'}}</p>
+                        <h5>{{checkupItem?.checkup?.name}}</h5>
                         <p class="m-0 text-muted small">{{getDateOnly(checkupItem?.dateTime)}}</p>
                       </div>
+                      <button class="btn small text-muted"
+                        (click)="download(checkupItem?.result, patientHistory?.patientInfo?.firstName+'-'+checkupItem?.checkup?.name+'-result')"><i
+                          class="fa-solid fa-download me-2"></i>Download
+                        result</button>
                     </div>
                   </ng-template>
                 </ng-container>
@@ -122,11 +125,12 @@
                 <ng-container *ngFor="let radiologyItem of patientHistory?.radiologies">
                   <ng-template carouselSlide [id]="radiologyItem?.radiology?.id">
                     <div class="inner">
-                      <h5>{{radiologyItem?.radiology?.name}}</h5>
                       <div class="d-flex justify-content-between">
-                        <p class="m-0 text-muted small">{{radiologyItem?.radiology.price|currency:'EGP'}}</p>
+                        <h5>{{radiologyItem?.radiology?.name}}</h5>
                         <p class="m-0 text-muted small">{{getDateOnly(radiologyItem?.dateTime)}}</p>
                       </div>
+                      <button class="btn small text-muted" (click)="download(radiologyItem?.result, patientHistory?.patientInfo?.firstName+'-'+radiologyItem?.checkup?.name+'-result')"><i class="fa-solid fa-download me-2"></i>Download
+                        result</button>
                     </div>
                   </ng-template>
                 </ng-container>
