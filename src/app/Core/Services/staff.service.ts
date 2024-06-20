@@ -210,6 +210,14 @@ export class StaffService {
     return this._HttpClient.post(environment.baseUrl + 'patient/register', data)
   }
 
+  getNurseCareRecords(patientId: string, roomId: number): Observable<any> {
+    return this._HttpClient.get(environment.baseUrl + `nurse/care/records?patientId=${patientId}&roomId=${roomId}`)
+  }
+
+  addNurseCareRecord(data: object): Observable<any> {
+    return this._HttpClient.post(environment.baseUrl + 'nurse/care/add', data)
+  }
+
   addReceptionist(data: object): Observable<any> {
     return this._HttpClient.post(environment.baseUrl + 'receptionist/add', data);
   }

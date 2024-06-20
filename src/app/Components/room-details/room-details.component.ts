@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AddBookingComponent } from '../add-booking/add-booking.component';
 import { PaymentBookingComponent } from '../payment-booking/payment-booking.component';
 import { AuthService } from 'src/app/Core/Services/auth.service';
+import { NurseCareRecordsComponent } from '../nurse-care-records/nurse-care-records.component';
 
 @Component({
   selector: 'app-room-details',
@@ -26,6 +27,20 @@ export class RoomDetailsComponent implements OnInit {
     public _AuthService: AuthService
   ) {
 
+  }
+
+  viewNurseCare(patientId: string, roomId: number) {
+    const dialogRef = this._MatDialog.open(NurseCareRecordsComponent, {
+      data: {
+        patientId: patientId,
+        roomId: roomId
+      },
+      width: '50%'
+    })
+
+    dialogRef.afterClosed().subscribe(message => {
+      console.log(message);
+    })
   }
 
   goToPatientProfile(id: string) {

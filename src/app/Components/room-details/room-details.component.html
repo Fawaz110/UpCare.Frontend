@@ -1,7 +1,7 @@
 <section class="py-2 px-3">
     <div class="container">
         <h1 class="display-5">Room No. {{data?.id}}</h1>
-        <div class="container">
+        <div class="container content">
             <ul class="list-unstyled">
                 <li class="mb-2">
                     <p><strong>Price Per Night: </strong>{{data?.pricePerNight | currency:'EGP'}}</p>
@@ -59,6 +59,9 @@
                                             </li>
                                         </ul>
                                         <div class="hstack justify-content-end">
+                                            <button mat-raised-button color="danger" class="me-2" *ngIf="_AuthService.user?.userRole == 'nurse'"
+                                                (click)="viewNurseCare(patientBooking?.patient?.id, data?.id)">Nurse
+                                                Care Records</button>
                                             <button mat-raised-button color="primary" class="me-2"
                                                 (click)="goToPatientProfile(patientBooking?.patient?.id)">View Patient
                                                 Profile</button>

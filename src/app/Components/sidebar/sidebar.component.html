@@ -56,7 +56,7 @@
                     </div>
                 </a>
             </li>
-            <li class="px-2 mb-2" *ngIf="['admin', 'receptionist', 'nurse'].includes(_AuthService.user?.userRole!)">
+            <li class="px-2 mb-2" *ngIf="['admin', 'receptionist', 'nurse', 'doctor'].includes(_AuthService.user?.userRole!)">
                 <a class="nav-link w-100 d-flex align-items-center position-relative" routerLink="/rooms" routerLinkActive="nav-link-acive">
                     <i class="position-absolute fa-solid fa-caret-right"></i>
                     <div class="link-inner">

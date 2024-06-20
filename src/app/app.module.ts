@@ -68,6 +68,8 @@ import { UploadCheckupResultComponent } from './Components/upload-checkup-result
 import { UploadRadiologyResultComponent } from './Componentts/upload-radiology-result/upload-radiology-result.component';
 import { CheckupSearchPipe } from './Core/Pipes/checkup-search.pipe';
 import { AddRadiologyComponent } from './Components/add-radiology/add-radiology.component';
+import { NurseCareRecordsComponent } from './Components/nurse-care-records/nurse-care-records.component';
+import { AddNurseCareComponent } from './Components/add-nurse-care/add-nurse-care.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +118,8 @@ import { AddRadiologyComponent } from './Components/add-radiology/add-radiology.
     UploadRadiologyResultComponent,
     CheckupSearchPipe,
     AddRadiologyComponent,
+    NurseCareRecordsComponent,
+    AddNurseCareComponent,
   ],
   imports: [
     BrowserModule,
