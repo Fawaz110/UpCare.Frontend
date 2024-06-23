@@ -68,6 +68,7 @@ export class ScheduleComponent implements OnInit {
     }
     else if (this._AuthService.user?.userRole == 'doctor') {
       this.getDoctorSchedule(this._AuthService.user.id!)
+      this.isOpen = true
     }
   }
 

@@ -81,6 +81,7 @@ export class AddPrescriptionComponent implements OnInit {
 
     this._StaffService.addPrescription(model).subscribe({
       next: response => {
+        console.log(response);
         this._MatDialogRef.close('success');
       },
       error: error => {
