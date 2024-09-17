@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
             this._AuthService.receptionistLogin(this.loginForm.value).subscribe({
               next: (response) => {
                 localStorage.setItem(environment.Token, JSON.stringify(response));
-
                 this._ToastrService.success(`Welcome ${response.firstName}`);
                 this._AuthService.user = response
                 this._Router.navigate(['/dashboard'])
